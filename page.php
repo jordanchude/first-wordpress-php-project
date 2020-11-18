@@ -19,7 +19,6 @@
 
     <?php 
       $theParent = wp_get_post_parent_id(get_the_ID());
-      
       // if page has a parent id, render the metabox div
       if ($theParent) { ?>
 
@@ -38,13 +37,36 @@
       <p><a class="metabox__blog-home-link" href="#"><i class="fa fa-home" aria-hidden="true"></i> Back to About Us</a> <span class="metabox__main"><?php the_title();?></span></p>
     </div> -->
     
-    <!-- <div class="page-links">
-      <h2 class="page-links__title"><a href="#">About Us</a></h2>
+    <div class="page-links">
+      <h2 class="page-links__title"><a href="<?php echo get_permalink($theParent);?>"><?php echo get_the_title($theParent);?></a></h2>
       <ul class="min-list">
-        <li class="current_page_item"><a href="#">Our History</a></li>
-        <li><a href="#">Our Goals</a></li>
+        <!-- creates children pages of the current page being viewed -->
+        <?php 
+          // an associative array
+          // $animalSounds = array(
+          //   'cat' => 'meow',
+          //   'dog' => 'bark',
+          //   'pig' => 'oink'
+          // );
+
+          // echo $animalSounds['dog'];
+
+          
+          // accepts an associative array
+          // tells the server to get children links
+          if ($theParent) {
+            $findChildrenOf = $theParent;
+          } else {
+            $findChildrenOf = get_the_ID();
+          }
+
+          wp_list_pages(array(
+            'title_li' => NULL,
+            'child_of' => $findChildrenOf
+          ));
+        ?>
       </ul>
-    </div> -->
+    </div>
 
     <div class="generic-content">
       <?php the_content();?>

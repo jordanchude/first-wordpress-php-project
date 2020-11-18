@@ -1,6 +1,13 @@
 <!-- function to get header from header.php -->
 <?php get_header(); ?>
 
+<!-- If a function begins with "the", Wordpress will echo and output the result for you  -->
+<!-- If a function begins with "get", Wordpress will not echo anything for you, it just returns it -->
+
+<!-- Resources/Documentation for Wordpress functions
+https://codex.wordpress.org/
+https://developer.wordpress.org/ -->
+
 <div class="page-banner">
       <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('/images/library-hero.jpg') ?>);"></div>
       <div class="page-banner__content container t-center c-white">
