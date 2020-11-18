@@ -37,6 +37,15 @@
       <p><a class="metabox__blog-home-link" href="#"><i class="fa fa-home" aria-hidden="true"></i> Back to About Us</a> <span class="metabox__main"><?php the_title();?></span></p>
     </div> -->
     
+    <!-- display if $theParent evaluates to > 0 or true, OR if you're on a parent page -->
+    <?php 
+    // this function handles outputting pages on screen for you
+    $testArray = get_pages(array(
+      'child_of' => get_the_ID()
+    ));
+
+    if ($theParent or $testArray) { ?>
+
     <div class="page-links">
       <h2 class="page-links__title"><a href="<?php echo get_permalink($theParent);?>"><?php echo get_the_title($theParent);?></a></h2>
       <ul class="min-list">
@@ -62,11 +71,14 @@
 
           wp_list_pages(array(
             'title_li' => NULL,
-            'child_of' => $findChildrenOf
+            'child_of' => $findChildrenOf,
+            // sort menu by order, which is defined in wp-admin
+            'sort_column' => 'menu_order'
           ));
         ?>
       </ul>
     </div>
+        <?php } ?>
 
     <div class="generic-content">
       <?php the_content();?>
